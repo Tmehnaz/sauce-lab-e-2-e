@@ -21,9 +21,13 @@ public class LoginTest {
     private WebDriver driver;
 
     @BeforeMethod
-   public void setup(){
+     public void setup(){
      WebDriverManager.chromedriver().setup();
      ChromeOptions options = new ChromeOptions();
+     if(System.getenv("CI") != null){
+        options.addArguments("--headless");
+     }
+     
      options.addArguments("--no-sandbox");
      options.addArguments("--disable-dev-shm-usage");
      driver = new ChromeDriver(options);
